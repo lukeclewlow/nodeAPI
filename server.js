@@ -1,15 +1,16 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
 var server = require('http').createServer(app);
 var port = 9999;
 
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname+'/public'));
 
 app.get('/', function(request, response){
-  response.send('Github API Simulation');
+  response.render('index');
 });
 
 app.get('/users/:user', function(request, response){
-  response.header('Access-Control-Allow-Origin','*');
   response.header('Content-Type','application/json; charset=utf-8');
   response.render(request.params.user);
 });
